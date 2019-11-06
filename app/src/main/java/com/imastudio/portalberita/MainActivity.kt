@@ -25,17 +25,21 @@ class MainActivity : AppCompatActivity() {
 
     private fun getBeritaFromNetwork() {
         var country = "id"
-        var api = "735732b99dce43aa88beb0b4c356cadd"
+        var apiKey = "735732b99dce43aa88beb0b4c356cadd"
         //menampilkan loading saat proses get Data ke Server
         var loading = ProgressDialog.show(this, "Process GET DATA", "Loading...")
-        InitRetrofit.getInstance().getDataBerita(country, api).enqueue(
+        InitRetrofit.getInstance().getDataBerita(country, apiKey).enqueue(
             object : Callback<ResponseBerita> {
                 override fun onFailure(call: Call<ResponseBerita>, t: Throwable) {
-                    Log.d("ERROR", t.localizedMessage)
+                    Log.d("cekresponse","ERROR :" + t.localizedMessage)
                     loading.dismiss()
                 }
 
-                override fun onResponse(call: Call<ResponseBerita>, response: Response<ResponseBerita>) {
+                override fun onResponse(
+                    call: Call<ResponseBerita>, response
+                    : Response<ResponseBerita>) {
+                    Log.d("cekresponse", "SUCCESS" + response.body()?.articles)
+                    loading.dismiss()
                     if (response.isSuccessful) {
                         var status = response.body()?.status
                         if (status.equals("OK")) {
