@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.imastudio.portalberita.adapter.BeritaAdapter
 import com.imastudio.portalberita.model.ResponseBerita
 import com.imastudio.portalberita.network.InitRetrofit
+import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,6 +41,9 @@ class MainActivity : AppCompatActivity() {
                         if (status.equals("OK")) {
                             Toast.makeText(this@MainActivity, "ADA DATA", Toast.LENGTH_SHORT).show()
                             var dataBerita = response.body()?.articles
+                            var adapter = BeritaAdapter(this@MainActivity, dataBerita)
+                            recyclerView.adapter = adapter
+                            recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
                         }else {
                             Toast.makeText(this@MainActivity, "TIDAK ADA DATA", Toast.LENGTH_SHORT).show()
                         }

@@ -34,8 +34,13 @@ dependencies {
     //network untuk akses json
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    //get image from url/server
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    //logging semua response web service
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
 }

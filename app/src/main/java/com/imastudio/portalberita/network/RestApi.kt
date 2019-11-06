@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface RestApi {
-    @GET
+    @GET("/")
     fun getDataBerita(
         @Query("country") country : String?,
         @Query("apiKey") api : String?
