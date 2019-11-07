@@ -31,25 +31,25 @@ class MainActivity : AppCompatActivity() {
         InitRetrofit.getInstance().getDataBerita(country, apiKey).enqueue(
             object : Callback<ResponseBerita> {
                 override fun onFailure(call: Call<ResponseBerita>, t: Throwable) {
-                    Log.d("cekresponse","ERROR :" + t.localizedMessage)
+                    Log.d("cekresponse","gagal :" + t.localizedMessage)
                     loading.dismiss()
                 }
 
                 override fun onResponse(
                     call: Call<ResponseBerita>, response
                     : Response<ResponseBerita>) {
-                    Log.d("cekresponse", "SUCCESS" + response.body()?.articles)
+                    Log.d("cekresponse", "berhasil" + response.body()?.articles)
                     loading.dismiss()
                     if (response.isSuccessful) {
                         var status = response.body()?.status
-                        if (status.equals("OK")) {
-                            Toast.makeText(this@MainActivity, "ADA DATA", Toast.LENGTH_SHORT).show()
+                        if (status.equals("ok")) {
+                            Toast.makeText(this@MainActivity, "ada data", Toast.LENGTH_SHORT).show()
                             var dataBerita = response.body()?.articles
                             var adapter = BeritaAdapter(this@MainActivity, dataBerita)
                             recyclerView.adapter = adapter
                             recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
                         }else {
-                            Toast.makeText(this@MainActivity, "TIDAK ADA DATA", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, "tidak ada data", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
