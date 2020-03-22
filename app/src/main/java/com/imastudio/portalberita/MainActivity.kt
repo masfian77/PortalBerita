@@ -12,7 +12,6 @@ import com.imastudio.portalberita.network.InitRetrofit
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
-import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,25 +30,26 @@ class MainActivity : AppCompatActivity() {
         InitRetrofit.getInstance().getDataBerita(country, apiKey).enqueue(
             object : Callback<ResponseBerita> {
                 override fun onFailure(call: Call<ResponseBerita>, t: Throwable) {
-                    Log.d("cekresponse","gagal :" + t.localizedMessage)
+                    Log.d("Response","Failed :" + t.localizedMessage)
                     loading.dismiss()
                 }
 
                 override fun onResponse(
                     call: Call<ResponseBerita>, response
-                    : Response<ResponseBerita>) {
-                    Log.d("cekresponse", "berhasil" + response.body()?.articles)
+                    : retrofit2.Response<ResponseBerita>
+                ) {
+                    Log.d("Response", "Success" + response.body()?.articles)
                     loading.dismiss()
                     if (response.isSuccessful) {
                         var status = response.body()?.status
                         if (status.equals("ok")) {
-                            Toast.makeText(this@MainActivity, "ada data", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, "GET DATA Success!", Toast.LENGTH_SHORT).show()
                             var dataBerita = response.body()?.articles
                             var adapter = BeritaAdapter(this@MainActivity, dataBerita)
                             recyclerView.adapter = adapter
                             recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
                         }else {
-                            Toast.makeText(this@MainActivity, "tidak ada data", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, "GET DATA Failed!", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }

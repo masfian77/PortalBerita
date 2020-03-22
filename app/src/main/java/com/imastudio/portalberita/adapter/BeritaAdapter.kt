@@ -22,15 +22,14 @@ class BeritaAdapter(
         fun bindItem(item: ArticlesItem) {
             with(itemView){
                 txtjudulberita.text = item.title
-                Picasso.get().load(item.urlToImage).placeholder(R.drawable.noimage).error(
-                    R.drawable.noimage).into(imgberita)
+                Picasso.get().load(item.urlToImage).placeholder(R.drawable.loading).error(
+                    R.drawable.loading).into(imgberita)
             }
         }
     }
 
     override fun getItemCount(): Int = dataBerita!!.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) =
-        holder.bindItem(dataBerita?.get(position)!!)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bindItem(dataBerita?.get(position)!!)
 
 }

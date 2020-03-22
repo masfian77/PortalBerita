@@ -18,7 +18,6 @@ class SplashScreenActivity : AppCompatActivity() {
         lottie1.loop(true)
         lottie1.playAnimation()
 
-        //untuk melakukan penundaan ke suatu aksi / activity
         val handler = Handler()
         handler.postDelayed({
             startActivity(Intent(this, MainActivity::class.java))
